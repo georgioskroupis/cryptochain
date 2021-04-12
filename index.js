@@ -1,3 +1,4 @@
+const bodyParser = require('body-parser');
 const express = require('express');
 const request = require('request');
 const path = require('path');
@@ -23,7 +24,7 @@ const wallet = new Wallet();
 const pubsub = new PubSub({ blockchain, transactionPool, redisUrl: REDIS_URL });
 const transactionMiner = new TransactionMiner({ blockchain, transactionPool, wallet, pubsub });
 
-app.use(express.json());
+app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'client/dist')));
 
 app.get('/api/blocks', (req, res) => {
